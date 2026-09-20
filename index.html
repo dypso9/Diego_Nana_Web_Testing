@@ -242,7 +242,7 @@
       <p>    Create your free account in about a minute. Your details stay private and you can edit them any time.</p>
     </div>
     <ul class="perks">
-      <li><span class="tick" aria-hidden="true">✓</span> Free to join, no credit card Needed</li>
+      <li><span class="tick" aria-hidden="true">✓</span>      Free to join, no credit card Needed</li>
       <li><span class="tick" aria-hidden="true">✓</span> Save your progress across all your devices</li>
       <li><span class="tick" aria-hidden="true">✓</span> Canceled or delete your account whenever you like</li>
     </ul>
@@ -252,7 +252,7 @@
     <div class="card">
 
       <div id="formView">
-        <h2>Create your account</h2>
+        <h2>Create your first account</h2>
         <p class="sub">Already registered? <a href="#">Log in</a></p>
 
         <form id="regForm" novalidate>
@@ -315,6 +315,7 @@
               <div class="field">
                 <label for="country">Country</label>
                 <select id="country" name="country" autocomplete="country-name" required>
+                  <!--
                   <option value="">Choose a country</option>
                   <option selected>Costa Rica</option>
                   <option>Argentina</option>
@@ -326,7 +327,7 @@
                   <option>Spain</option>
                   <option>United States</option>
                   <option>Other</option>
-                </select>
+                </select> -->
                 <p class="msg" aria-live="polite"></p>
               </div>
             </div>
@@ -438,7 +439,7 @@
       if (isNaN(d.getTime()) || d > now) return 'Choose a date in the past.';
       var age = now.getFullYear() - d.getFullYear();
       var m = now.getMonth() - d.getMonth();
-      if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
+      //if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
       if (age < 1) return 'You must be 18 or older to register.';
       if (age > 120) return 'Check the year of your date of birth.';
       return '';
