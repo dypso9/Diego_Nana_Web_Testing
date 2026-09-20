@@ -439,10 +439,10 @@
       if (isNaN(d.getTime()) || d > now) return 'Choose a date in the past.';
       var age = now.getFullYear() - d.getFullYear();
       var m = now.getMonth() - d.getMonth();
-      //if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
+      /*if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
       if (age < 1) return 'You must be 18 or older to register.';
       if (age > 120) return 'Check the year of your date of birth.';
-      return '';
+      return '';*/
     },
     email: function (v) {
       if (!v.trim()) return 'Enter your email address.';
