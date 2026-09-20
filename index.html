@@ -1,12 +1,553 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Create your account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6fc;
+    --card: #ffffff;
+    --ink: #1c2040;
+    --muted: #5d6285;
+    --line: #d9dcef;
+    --brand: #4b3fd6;
+    --brand-ink: #ffffff;
+    --brand-deep: #2c2596;
+    --accent: #ffc93c;
+    --ok: #12805c;
+    --err: #c62f4b;
+    --focus: #ffc93c;
+    --font-head: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
+    --font-body: "DM Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12142a;
+      --card: #1b1e3d;
+      --ink: #eceeff;
+      --muted: #a6abd3;
+      --line: #35396a;
+      --brand: #8f85ff;
+      --brand-ink: #14163a;
+      --brand-deep: #241f7a;
+      --ok: #45d0a0;
+      --err: #ff7d94;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12142a;
+    --card: #1b1e3d;
+    --ink: #eceeff;
+    --muted: #a6abd3;
+    --line: #35396a;
+    --brand: #8f85ff;
+    --brand-ink: #14163a;
+    --brand-deep: #241f7a;
+    --ok: #45d0a0;
+    --err: #ff7d94;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  /* ---------- Left panel ---------- */
+  .intro {
+    position: relative;
+    overflow: hidden;
+    background: var(--brand-deep);
+    background-image:
+      radial-gradient(circle at 15% 12%, #6a5cf0 0, transparent 46%),
+      radial-gradient(circle at 90% 95%, #3b32b8 0, transparent 50%);
+    color: #fff;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+  .brand {
+    display: flex; align-items: center; gap: .65rem;
+    font-family: var(--font-head); font-weight: 800; font-size: 1.35rem;
+  }
+  .brand-mark {
+    width: 2.2rem; height: 2.2rem; border-radius: 50%;
+    background: var(--accent); color: #2b2100;
+    display: grid; place-items: center; font-size: 1.15rem;
+  }
+  .intro h1 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+    max-width: 12ch;
+  }
+  .intro p { margin: 0; max-width: 34ch; color: #dcd9ff; font-size: 1.05rem; }
+  .perks { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+  .perks li { display: flex; gap: .75rem; align-items: flex-start; color: #ecebff; }
+  .perks .tick {
+    flex: none; width: 1.5rem; height: 1.5rem; border-radius: 50%;
+    background: var(--accent); color: #2b2100; font-size: .85rem; font-weight: 700;
+    display: grid; place-items: center; margin-top: .1rem;
+  }
+
+  /* ---------- Right panel ---------- */
+  .form-side {
+    display: grid; place-items: center;
+    padding: clamp(1.25rem, 4vw, 3.5rem);
+  }
+  .card {
+    width: 100%; max-width: 640px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(1.5rem, 3.5vw, 2.6rem);
+    box-shadow: 0 18px 50px -24px rgba(44, 37, 150, .45);
+  }
+  .card h2 {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    letter-spacing: -0.01em; margin: 0 0 .35rem;
+  }
+  .card .sub { margin: 0 0 1.75rem; color: var(--muted); }
+  .card .sub a { color: var(--brand); font-weight: 700; text-decoration: none; }
+  .card .sub a:hover { text-decoration: underline; }
+
+  fieldset { border: 0; padding: 0; margin: 0 0 1.6rem; min-width: 0; }
+  legend {
+    font-family: var(--font-head); font-weight: 600; font-size: 1.1rem;
+    padding: 0; margin-bottom: .9rem; color: var(--brand);
+  }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.1rem; }
+  .full { grid-column: 1 / -1; }
+
+  .field { display: flex; flex-direction: column; gap: .35rem; }
+  label, .label { font-weight: 700; font-size: .92rem; }
+  .opt { font-weight: 400; color: var(--muted); }
+  input:not([type="checkbox"]), select {
+    width: 100%;
+    font: inherit; color: var(--ink);
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: .72rem .85rem;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  input::placeholder { color: var(--muted); opacity: .7; }
+  input:hover, select:hover { border-color: var(--brand); }
+  input:focus-visible, select:focus-visible, button:focus-visible, .check input:focus-visible + .box {
+    outline: 3px solid var(--focus); outline-offset: 2px; border-color: var(--brand);
+  }
+  .field.invalid input, .field.invalid select { border-color: var(--err); }
+  .field.valid input, .field.valid select { border-color: var(--ok); }
+  .msg { min-height: 1.1rem; font-size: .82rem; color: var(--err); margin: 0; }
+
+  .pw-wrap { position: relative; }
+  .pw-wrap input { padding-right: 4.6rem; }
+  .pw-toggle {
+    position: absolute; right: .4rem; top: 50%; transform: translateY(-50%);
+    background: none; border: 0; color: var(--brand); font: inherit; font-weight: 700;
+    font-size: .85rem; padding: .35rem .55rem; border-radius: 8px; cursor: pointer;
+  }
+  .pw-toggle:hover { background: var(--line); }
+
+  .meter { display: flex; gap: 4px; margin-top: .3rem; }
+  .meter span { flex: 1; height: 6px; border-radius: 3px; background: var(--line); transition: background .2s; }
+  .meter[data-level="1"] span:nth-child(-n+1) { background: var(--err); }
+  .meter[data-level="2"] span:nth-child(-n+2) { background: #e69a1a; }
+  .meter[data-level="3"] span:nth-child(-n+3) { background: #8bbf2f; }
+  .meter[data-level="4"] span:nth-child(-n+4) { background: var(--ok); }
+  .meter-text { font-size: .8rem; color: var(--muted); margin: .15rem 0 0; }
+
+  .check { display: flex; gap: .7rem; align-items: flex-start; cursor: pointer; font-weight: 400; font-size: .95rem; }
+  .check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .check .box {
+    flex: none; width: 1.3rem; height: 1.3rem; margin-top: .1rem;
+    border: 1.5px solid var(--line); border-radius: 6px; background: var(--bg);
+    display: grid; place-items: center; transition: background .15s, border-color .15s;
+  }
+  .check .box::after { content: "✓"; color: var(--brand-ink); font-size: .85rem; font-weight: 700; opacity: 0; }
+  .check input:checked + .box { background: var(--brand); border-color: var(--brand); }
+  .check input:checked + .box::after { opacity: 1; }
+  .check a { color: var(--brand); font-weight: 700; }
+  .checks { display: grid; gap: .5rem; }
+
+  .submit {
+    width: 100%; margin-top: .6rem;
+    font: inherit; font-weight: 700; font-size: 1.05rem;
+    color: var(--brand-ink); background: var(--brand);
+    border: 0; border-radius: 12px; padding: .95rem 1.2rem; cursor: pointer;
+    box-shadow: 0 6px 0 var(--brand-deep);
+    transition: transform .1s, box-shadow .1s;
+  }
+  .submit:hover { transform: translateY(2px); box-shadow: 0 4px 0 var(--brand-deep); }
+  .submit:active { transform: translateY(6px); box-shadow: 0 0 0 var(--brand-deep); }
+
+  .success { text-align: center; padding: 1rem 0; }
+  .success .badge {
+    width: 4.5rem; height: 4.5rem; border-radius: 50%;
+    background: var(--accent); color: #2b2100; font-size: 2rem; font-weight: 800;
+    display: grid; place-items: center; margin: 0 auto 1.25rem;
+  }
+  .success p { color: var(--muted); max-width: 40ch; margin: .5rem auto 1.5rem; }
+  .ghost {
+    font: inherit; font-weight: 700; color: var(--brand); background: none;
+    border: 2px solid var(--brand); border-radius: 12px; padding: .7rem 1.4rem; cursor: pointer;
+  }
+  .ghost:hover { background: var(--brand); color: var(--brand-ink); }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 860px) {
+    .page { grid-template-columns: 1fr; }
+    .intro { gap: 1.5rem; }
+    .intro h1 { max-width: none; }
+  }
+  @media (max-width: 520px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
 </head>
 <body>
-    <h1>Nuevo Proyecto</h1>
-    <p>Creado paso a paso en GitHub.</p>
+<main class="page">
+
+  <section class="intro" aria-label="Welcome">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span> Brightpath</div>
+    <div>
+      <h1>Mariana - QA Practice</h1>
+      <h1>Start your journey with us</h1>
+      <p>Create your free account in about a minute. Your details stay private and you can edit them any time.</p>
+    </div>
+    <ul class="perks">
+      <li><span class="tick" aria-hidden="true">✓</span> Free to join, no credit card needed</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Save your progress across all your devices</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Cancel or delete your account whenever you like</li>
+    </ul>
+  </section>
+
+  <section class="form-side">
+    <div class="card">
+
+      <div id="formView">
+        <h2>Create your account</h2>
+        <p class="sub">Already registered? <a href="#">Log in</a></p>
+
+        <form id="regForm" novalidate>
+
+          <fieldset>
+            <legend>About you</legend>
+            <div class="grid">
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input id="firstName" name="firstName" type="text" autocomplete="given-name" placeholder="Diego" required>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="middleName">Second name <span class="opt">(optional)</span></label>
+                <input id="middleName" name="middleName" type="text" autocomplete="additional-name" placeholder="Andrés">
+                <p class="msg"></p>
+              </div>
+              <div class="field">
+                <label for="lastName">First last name</label>
+                <input id="lastName" name="lastName" type="text" autocomplete="family-name" placeholder="Porras" required>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="lastName2">Second last name <span class="opt">(optional)</span></label>
+                <input id="lastName2" name="lastName2" type="text" placeholder="Mora">
+                <p class="msg"></p>
+              </div>
+              <div class="field">
+                <label for="dob">Date of birth</label>
+                <input id="dob" name="dob" type="date" autocomplete="bday" required>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="gender">Gender <span class="opt">(optional)</span></label>
+                <select id="gender" name="gender">
+                  <option value="">Prefer not to say</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Non-binary</option>
+                  <option>Other</option>
+                </select>
+                <p class="msg"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>How to reach you</legend>
+            <div class="grid">
+              <div class="field full">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="phone">Phone number <span class="opt">(optional)</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+506 8888 8888">
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="country">Country</label>
+                <select id="country" name="country" autocomplete="country-name" required>
+                  <option value="">Choose a country</option>
+                  <option selected>Costa Rica</option>
+                  <option>Argentina</option>
+                  <option>Chile</option>
+                  <option>Colombia</option>
+                  <option>Mexico</option>
+                  <option>Panama</option>
+                  <option>Peru</option>
+                  <option>Spain</option>
+                  <option>United States</option>
+                  <option>Other</option>
+                </select>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Secure your account</legend>
+            <div class="grid">
+              <div class="field">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" placeholder="diego.porras" required>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field"></div>
+              <div class="field">
+                <label for="password">Password</label>
+                <div class="pw-wrap">
+                  <input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" required aria-describedby="pwText">
+                  <button type="button" class="pw-toggle" data-target="password" aria-label="Show password">Show</button>
+                </div>
+                <div class="meter" id="meter" data-level="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <p class="meter-text" id="pwText">Use upper and lower case letters, numbers and a symbol.</p>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="confirm">Confirm password</label>
+                <div class="pw-wrap">
+                  <input id="confirm" name="confirm" type="password" autocomplete="new-password" placeholder="Repeat your password" required>
+                  <button type="button" class="pw-toggle" data-target="confirm" aria-label="Show password confirmation">Show</button>
+                </div>
+                <p class="msg" aria-live="polite"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="checks">
+            <div class="field">
+              <label class="check" for="terms">
+                <input id="terms" name="terms" type="checkbox" required>
+                <span class="box" aria-hidden="true"></span>
+                <span>I agree to the <a href="#">Terms of Use</a> and the <a href="#">Privacy Policy</a>.</span>
+              </label>
+              <p class="msg" aria-live="polite"></p>
+            </div>
+            <label class="check" for="news">
+              <input id="news" name="news" type="checkbox">
+              <span class="box" aria-hidden="true"></span>
+              <span>Send me occasional news and tips by email.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="submit">Create account</button>
+        </form>
+      </div>
+
+      <div id="doneView" class="success" hidden>
+        <div class="badge" aria-hidden="true">✓</div>
+        <h2 id="doneTitle" tabindex="-1">Account created</h2>
+        <p id="doneText"></p>
+        <button type="button" class="ghost" id="resetBtn">Register another person</button>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('regForm');
+  var formView = document.getElementById('formView');
+  var doneView = document.getElementById('doneView');
+
+  function fieldOf(el) { return el.closest('.field'); }
+
+  function setState(el, message) {
+    var f = fieldOf(el);
+    if (!f) return;
+    var msg = f.querySelector('.msg');
+    f.classList.remove('valid', 'invalid');
+    if (message) {
+      f.classList.add('invalid');
+      if (msg) msg.textContent = message;
+      el.setAttribute('aria-invalid', 'true');
+    } else {
+      if (el.value && el.type !== 'checkbox') f.classList.add('valid');
+      if (msg) msg.textContent = '';
+      el.removeAttribute('aria-invalid');
+    }
+  }
+
+  var nameRe = /^[A-Za-zÀ-ÖØ-öø-ÿ'’ -]+$/;
+
+  var rules = {
+    firstName: function (v) {
+      if (!v.trim()) return 'Enter your first name.';
+      if (!nameRe.test(v.trim())) return 'Use letters only.';
+      return '';
+    },
+    middleName: function (v) { return v && !nameRe.test(v.trim()) ? 'Use letters only.' : ''; },
+    lastName: function (v) {
+      if (!v.trim()) return 'Enter your first last name.';
+      if (!nameRe.test(v.trim())) return 'Use letters only.';
+      return '';
+    },
+    lastName2: function (v) { return v && !nameRe.test(v.trim()) ? 'Use letters only.' : ''; },
+    dob: function (v) {
+      if (!v) return 'Choose your date of birth.';
+      var d = new Date(v), now = new Date();
+      if (isNaN(d.getTime()) || d > now) return 'Choose a date in the past.';
+      var age = now.getFullYear() - d.getFullYear();
+      var m = now.getMonth() - d.getMonth();
+      if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
+      if (age < 18) return 'You must be 18 or older to register.';
+      if (age > 120) return 'Check the year of your date of birth.';
+      return '';
+    },
+    email: function (v) {
+      if (!v.trim()) return 'Enter your email address.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())) return 'Enter an email like name@example.com.';
+      return '';
+    },
+    phone: function (v) {
+      if (!v.trim()) return '';
+      var digits = v.replace(/\D/g, '');
+      if (!/^[\d\s()+-]+$/.test(v) || digits.length < 8 || digits.length > 15) return 'Enter 8 to 15 digits.';
+      return '';
+    },
+    country: function (v) { return v ? '' : 'Choose your country.'; },
+    username: function (v) {
+      if (!v.trim()) return 'Choose a username.';
+      if (!/^[A-Za-z0-9._-]{4,20}$/.test(v.trim())) return 'Use 4 to 20 letters, numbers, dots, dashes or underscores.';
+      return '';
+    },
+    password: function (v) {
+      if (!v) return 'Create a password.';
+      if (v.length < 8) return 'Use at least 8 characters.';
+      if (!/[a-z]/.test(v) || !/[A-Z]/.test(v) || !/\d/.test(v)) return 'Include upper and lower case letters and a number.';
+      return '';
+    },
+    confirm: function (v) {
+      if (!v) return 'Repeat your password.';
+      if (v !== form.elements.password.value) return 'The passwords do not match.';
+      return '';
+    },
+    terms: function () { return form.elements.terms.checked ? '' : 'Accept the terms to continue.'; }
+  };
+
+  function validate(name) {
+    var el = form.elements[name];
+    if (!el || !rules[name]) return true;
+    var err = rules[name](el.value);
+    setState(el, err);
+    return !err;
+  }
+
+  Object.keys(rules).forEach(function (name) {
+    var el = form.elements[name];
+    if (!el) return;
+    el.addEventListener('blur', function () { validate(name); });
+    el.addEventListener('input', function () {
+      if (fieldOf(el).classList.contains('invalid') || name === 'confirm') validate(name);
+    });
+    if (el.type === 'checkbox') el.addEventListener('change', function () { validate(name); });
+  });
+
+  /* Password strength */
+  var meter = document.getElementById('meter');
+  var pwText = document.getElementById('pwText');
+  var labels = ['Use upper and lower case letters, numbers and a symbol.', 'Weak password', 'Fair password', 'Good password', 'Strong password'];
+  form.elements.password.addEventListener('input', function () {
+    var v = this.value, score = 0;
+    if (v.length >= 8) score++;
+    if (/[a-z]/.test(v) && /[A-Z]/.test(v)) score++;
+    if (/\d/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v) || v.length >= 14) score++;
+    if (!v) score = 0;
+    meter.setAttribute('data-level', score);
+    pwText.textContent = labels[score];
+    if (form.elements.confirm.value) validate('confirm');
+  });
+
+  /* Show / hide password */
+  document.querySelectorAll('.pw-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var input = document.getElementById(btn.getAttribute('data-target'));
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'Hide' : 'Show';
+      btn.setAttribute('aria-label', (show ? 'Hide ' : 'Show ') + (input.id === 'password' ? 'password' : 'password confirmation'));
+    });
+  });
+
+  /* Submit */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var firstBad = null;
+    Object.keys(rules).forEach(function (name) {
+      if (!validate(name) && !firstBad) firstBad = form.elements[name];
+    });
+    if (firstBad) { firstBad.focus(); return; }
+
+    var first = form.elements.firstName.value.trim();
+    var email = form.elements.email.value.trim();
+    document.getElementById('doneTitle').textContent = 'Welcome, ' + first + '!';
+    document.getElementById('doneText').textContent = 'Your account is ready. We sent a confirmation link to ' + email + '.';
+    formView.hidden = true;
+    doneView.hidden = false;
+    document.getElementById('doneTitle').focus();
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    form.reset();
+    form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('valid', 'invalid'); });
+    form.querySelectorAll('.msg').forEach(function (m) { m.textContent = ''; });
+    meter.setAttribute('data-level', 0);
+    pwText.textContent = labels[0];
+    doneView.hidden = true;
+    formView.hidden = false;
+    form.elements.firstName.focus();
+  });
+})();
+</script>
 </body>
 </html>
