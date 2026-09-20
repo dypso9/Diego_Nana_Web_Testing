@@ -239,12 +239,12 @@
     <div>
       <h1>Mariana - QA Practice</h1>
       <h1>Start your journey with us</h1>
-      <p>Create your free account in about a minute. Your details stay private and you can edit them any time.</p>
+      <p>    Create your free account in about a minute. Your details stay private and you can edit them any time.</p>
     </div>
     <ul class="perks">
-      <li><span class="tick" aria-hidden="true">✓</span> Free to join, no credit card needed</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Free to join, no credit card Needed</li>
       <li><span class="tick" aria-hidden="true">✓</span> Save your progress across all your devices</li>
-      <li><span class="tick" aria-hidden="true">✓</span> Cancel or delete your account whenever you like</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Canceled or delete your account whenever you like</li>
     </ul>
   </section>
 
@@ -266,33 +266,33 @@
                 <p class="msg" aria-live="polite"></p>
               </div>
               <div class="field">
-                <label for="middleName">Second name <span class="opt">(optional)</span></label>
-                <input id="middleName" name="middleName" type="text" autocomplete="additional-name" placeholder="Andrés">
+                <label for="middleName">Second name <span class="opt"></span></label>
+                <input id="middleName" name="middleName" type="text" autocomplete="additional-name" placeholder="Second Name">
                 <p class="msg"></p>
               </div>
               <div class="field">
-                <label for="lastName">First last name</label>
-                <input id="lastName" name="lastName" type="text" autocomplete="family-name" placeholder="Porras" required>
+                <label for="lastName">  First Last name</label>
+                <input id="lastName" name="lastName" type="text" autocomplete="family-name" placeholder="First Last Name" required>
                 <p class="msg" aria-live="polite"></p>
               </div>
               <div class="field">
                 <label for="lastName2">Second last name <span class="opt">(optional)</span></label>
-                <input id="lastName2" name="lastName2" type="text" placeholder="Mora">
+                <input id="lastName2" name="lastName2" type="text" placeholder="Enter">
                 <p class="msg"></p>
               </div>
               <div class="field">
-                <label for="dob">Date of birth</label>
-                <input id="dob" name="dob" type="date" autocomplete="bday" required>
+                <label for="dob">DOB</label>
+                <input id="dob" name="dob" <!-- type="date"--> autocomplete="bday" required>
                 <p class="msg" aria-live="polite"></p>
               </div>
               <div class="field">
-                <label for="gender">Gender <span class="opt">(optional)</span></label>
+                <label for="gender"> Gender <span class="opt">(optional)</span></label>
                 <select id="gender" name="gender">
                   <option value="">Prefer not to say</option>
-                  <option>Female</option>
+                  <option>FemaleS</option>
                   <option>Male</option>
                   <option>Non-binary</option>
-                  <option>Other</option>
+                  <option>Other, ETC</option>
                 </select>
                 <p class="msg"></p>
               </div>
@@ -333,10 +333,10 @@
           </fieldset>
 
           <fieldset>
-            <legend>Secure your account</legend>
+            <legend>        Secure your account</legend>
             <div class="grid">
               <div class="field">
-                <label for="username">Username</label>
+                <label for="username">   Username</label>
                 <input id="username" name="username" type="text" autocomplete="username" placeholder="diego.porras" required>
                 <p class="msg" aria-live="polite"></p>
               </div>
@@ -367,7 +367,7 @@
               <label class="check" for="terms">
                 <input id="terms" name="terms" type="checkbox" required>
                 <span class="box" aria-hidden="true"></span>
-                <span>I agree to the <a href="#">Terms of Use</a> and the <a href="#">Privacy Policy</a>.</span>
+                <span>I agreedst to the <a href="#">Terms of Use</a> and the <a href="#">Privacy Policy</a>.</span>
               </label>
               <p class="msg" aria-live="polite"></p>
             </div>
@@ -439,13 +439,13 @@
       var age = now.getFullYear() - d.getFullYear();
       var m = now.getMonth() - d.getMonth();
       if (m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
-      if (age < 18) return 'You must be 18 or older to register.';
+      if (age < 1) return 'You must be 18 or older to register.';
       if (age > 120) return 'Check the year of your date of birth.';
       return '';
     },
     email: function (v) {
       if (!v.trim()) return 'Enter your email address.';
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())) return 'Enter an email like name@example.com.';
+      //if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())) return 'Enter an email like name@example.com.';
       return '';
     },
     phone: function (v) {
